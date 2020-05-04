@@ -1,4 +1,4 @@
-- name: Add https://charts.jetstack.io repo to helm
+- name: Add https://jupyterhub.github.io/helm-chart repo to helm
   shell: "helm repo add jupyterhub https://jupyterhub.github.io/helm-chart"
 
 - name: Update helm repos
