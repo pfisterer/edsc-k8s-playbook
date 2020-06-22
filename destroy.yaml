@@ -28,3 +28,11 @@
     - shell: "helm uninstall -n '{{ k8s_ingress_namespace }}' '{{ k8s_ingress_release_name }}'"
       ignore_errors: True
       no_log: True
+
+    - shell: "helm uninstall -n '{{ keycloak_namespace }}' '{{ keycloak_release_name }}'"
+      ignore_errors: True
+      no_log: True
+
+    - shell: "helm uninstall -n '{{ minio_namespace }}' '{{ minio_release_name }}'"
+      ignore_errors: True
+      no_log: True

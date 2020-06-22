@@ -27,3 +27,13 @@
       tags:
         - jupyter
       when: binder_enable
+
+    - role: minio
+      tags:
+        - minio
+      when: minio_enable
+
+    - role: keycloak
+      tags:
+        - keycloak
+      when: keycloak_enable

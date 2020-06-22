@@ -1,12 +1,11 @@
 domain: "my.domain.de"
 
 name: "{{ lookup('env','NAME') | default('k8s', true) }}"
-k8s_on_openstack_site_yaml: "{{ playbook_dir }}/../k8s-on-openstack/site.yaml"
 kubeconfig: "{{ playbook_dir }}/../k8s-on-openstack/admin-{{ name }}.conf"
 
-k8s_enable_workarounds: True
+k8s_enable_workarounds: False
 
-k8s_ingress_enable: True
+k8s_ingress_enable: False
 k8s_ingress_release_name: ingress-helm
 k8s_ingress_namespace: kube-system
 
@@ -17,14 +16,14 @@ external_dns_domain_filter: "{{ domain }}"
 # options: panic, debug, info, warn, error, fatal
 external_dns_log_level: "debug"
 
-cert_manager_enable: True
+cert_manager_enable: False
 cert_manager_namespace: "cert-manager" # do not modify this (cf. https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html)
 cert_manager_release_name: "cert-manager"
 cert_manager_version: "v0.11.0"
 cert_manager_image_tag: "v0.11.0"
 cert_manager_verbosity: 5
 
-letsencrypt_email: "my.name@my-email-domain.de"
+letsencrypt_email: "dennis.pfisterer@dhbw-mannheim.de"
 letsencrypt_cert_cn: "*.{{ domain }}"
 
 rfc2136_nameserver: "1.2.3.4:53" # letsencrypt issuer requires an IP address
@@ -41,7 +40,7 @@ rfc2136_tsigKeyname: "{{ domain }}"
 rfc2136_tsigAlg: "hmac-sha512"
 rfc2136_tsigAlgLetsencrypt: "HMACSHA512"
 
-binder_enable: True
+binder_enable: False
 binder_namespace: "cert-manager"
 binder_release_name: "hub"
 # https://jupyterhub.github.io/helm-chart/#development-releases-binderhub or run "helm repo update && helm search repo -l  jupyterhub/binderhub"
@@ -62,12 +61,12 @@ jupyter_ingress_hostname: "jupyter.{{ domain }}"
 
 jupyter_ingress_binder_hostname: "binder.{{ domain }}"
 
-hadoop_enable: True
+hadoop_enable: False
 hadoop_namespace: "cert-manager"
 hadoop_release_name: "hadoop"
 hadoop_data_nodes: 6
 hadoop_yarn_nodes: 10
 
-knox_enable: True
+knox_enable: False
 knox_release_name: "knox"
 knox_ingress_hostname: "knox.{{ domain }}"

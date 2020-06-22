@@ -14,12 +14,23 @@
 
 ## Getting started
 
+### Running ansible directly
+
+Set env var pointing to the settings: `export settings=private-settings.yaml`
+
+Running all roles: `ansible-playbook --extra-vars "@$settings" create.yaml`
+
+Run sub-elements only (e.g., only keycloak): `ansible-playbook --extra-vars "@$settings" --tags keycloak create.yaml`
+
+### Using with k8s-on-openstack
+
 1. Download/clone <https://github.com/infraly/k8s-on-openstack>.
 2. Modify `run-demo-settings.yaml` to match your local setup.
 
 Create: `./run-demo.sh create`
 
 Destroy: `./run-demo.sh destroy`
+
 
 ## Prerequisites
 
@@ -28,4 +39,3 @@ Destroy: `./run-demo.sh destroy`
 # Authors
 
 - Dennis Pfisterer <https://github.com/pfisterer>
-

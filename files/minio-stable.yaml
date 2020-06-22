@@ -1,0 +1,37 @@
+global:
+  minio:
+    accessKey: "sfsafasfasdfasdfsdaf"
+    secretKey: "DEasfasdfasdfasdfsfaF"
+
+persistence:
+  enabled: false
+
+ingress:
+  enabled: true
+  hosts:
+    - "{{ minio_ingress_hostname }}"
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "{{ minio_ingress_hostname }}"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    ingress.kubernetes.io/ssl-redirect: "false"
+#  tls:
+#    - hosts:
+#        - "{{ minio_ingress_hostname }}"
+
+## Create a bucket after minio install
+##
+defaultBucket:
+  enabled: false
+  ## If enabled, must be a string with length > 0
+  name: bucket
+  ## Can be one of none|download|upload|public
+  policy: none
+  ## Purge if bucket exists already
+  purge: false
+
+#head -c 32 /dev/urandom | xxd -c 32 -ps
+#
+extraEnv:
+  MINIO_KMS_MASTER_KEY: "my-minio-key:049949fdef0c31c34845196b4c4497b7443aac37f87927a47738adbf9249fcd8"
+  MINIO_HTTP_TRACE: "/tmp/trace.log"

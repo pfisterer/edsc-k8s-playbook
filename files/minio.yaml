@@ -1,0 +1,54 @@
+global:
+  minio:
+    accessKey: "sfsafasfasdfasdfsdaf"
+    secretKey: "DEasfasdfasdfasdfsfaF"
+
+## MinIO credentials
+##
+#accessKey:
+## MinIO Access Key
+## ref: https://github.com/bitnami/bitnami-docker-minio/#setting-up-minio-in-distributed-mode
+##
+#  password:
+## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
+## If it is not force, a random password will be generated.
+##
+# forcePassword: false
+# secretKey:
+## MinIO Secret Key
+## ref: https://github.com/bitnami/bitnami-docker-minio/#setting-up-minio-in-distributed-mode
+##
+#  password:
+## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
+## If it is not force, a random password will be generated.
+##
+#  forcePassword: false
+
+## Comma, semi-colon or space separated list of buckets to create at initialization (only in standalone mode)
+##
+defaultBuckets: "bla"
+
+## Define custom environment variables to pass to the image here
+##
+
+#head -c 32 /dev/urandom | xxd -c 32 -ps
+#
+extraEnv:
+  - name: MINIO_KMS_MASTER_KEY
+    value: "my-minio-key:049949fdef0c31c34845196b4c4497b7443aac37f87927a47738adbf9249fcd8"
+  - name: MINIO_HTTP_TRACE
+    value: "/opt/bitnami/minio/log/minio-http.log"
+
+persistence:
+  enabled: false
+
+ingress:
+  enabled: true
+  hosts:
+    - name: "{{ minio_ingress_hostname }}"
+      path: /
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "{{ minio_ingress_hostname }}"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    ingress.kubernetes.io/ssl-redirect: "false"
