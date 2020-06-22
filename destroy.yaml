@@ -1,8 +1,6 @@
 - name: Delete deployments
   hosts: localhost
   gather_facts: false
-  environment:
-    KUBECONFIG: "{{ kubeconfig }}"
 
   tasks:
     - shell: "helm uninstall -n '{{cert_manager_namespace }}' '{{ cert_manager_release_name }}'"

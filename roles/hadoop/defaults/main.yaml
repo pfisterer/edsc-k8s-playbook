@@ -1,0 +1,9 @@
+hadoop_enable: False
+hadoop_namespace: "cert-manager"
+hadoop_release_name: "hadoop"
+hadoop_data_nodes: 3
+hadoop_yarn_nodes: 3
+
+knox_enable: False
+knox_release_name: "knox"
+knox_ingress_hostname: "knox.{{ domain }}"

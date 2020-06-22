@@ -1,0 +1,15 @@
+# see roles/*/defaults/main.yaml for variables to override/customize for each role
+
+domain: "my-domain.tld"
+
+# external dns + cert-manager
+rfc2136_nameserver_ip: "111.222.333.444"
+
+# external dns
+external_dns_enable: True
+rfc2136_tsigSecret: "sadfjaslkfj4aslkfjasoias6dfjasdokjdflsa4dfjsadlf45jasldfjasdfw=="
+rfc2136_tsigKeyname: "{{ domain }}"
+rfc2136_tsigAlg: "hmac-sha512"
+
+# cert-manager
+rfc2136_tsigAlgLetsencrypt: "HMACSHA512"

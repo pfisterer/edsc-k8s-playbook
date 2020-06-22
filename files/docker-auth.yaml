@@ -73,7 +73,7 @@ docker-registry:
   extraVolumes:
     - name: token-auth-root-cert-bundle
       secret:
-        secretName: "{{ name }}-docker-registry-cert"
+        secretName: "docker-registry-cert"
         items:
           - key: tokenAuthRootCertBundle
             path: cert.pem

@@ -1,0 +1,22 @@
+external_dns_enable: True
+external_dns_namespace: "cert-manager"
+external_dns_release_name: "external-dns"
+external_dns_domain_filter: "{{ domain }}"
+
+# options: panic, debug, info, warn, error, fatal
+external_dns_log_level: "debug"
+
+# do not edit
+
+# cf. https://www.semicomplete.com/articles/dynamic-dns-with-dhcp/
+# dnssec-keygen -r /dev/urandom -a HMAC-SHA512 -b 512 -n USER edsc-sturm.farberg.de.
+# dig +trace +additional @localhost axfr {{ domain }}. -y hmac-sha512:{{ domain }}.:lxp46C5HfMAwT48tqK4CMLU5PyDBt2jf0Qtj8TEsQf6ruc+3xXRMR0hqtTKUsAPjYGrLooRfqiq7IFnQINdjzw==
+rfc2136_host: "{{rfc2136_nameserver_ip}}"
+rfc2136_port: "{{rfc2136_nameserver_port}}"
+rfc2136_zone: "{{ domain }}."
+
+#rfc2136_tsigSecret: "NOT WORKING, PLEASE OVERRIDE=="
+
+rfc2136_tsigKeyname: "{{ domain }}"
+rfc2136_tsigAlg: "hmac-sha512"
+rfc2136_tsigAlgLetsencrypt: "HMACSHA512"

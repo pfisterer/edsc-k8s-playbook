@@ -1,13 +1,8 @@
 - name: Create k8s cluster
   hosts: localhost
   gather_facts: false
-  environment:
-    KUBECONFIG: "{{ kubeconfig }}"
 
   roles:
-    - role: k8s-openstack
-      when: k8s_enable_workarounds
-
     - role: external-dns
       tags:
         - external-dns

@@ -6,7 +6,7 @@
   register: docker_reg_secret_config
 
 - name: Delete existing secret
-  shell: "kubectl -n {{ binder_namespace }} delete secret {{ name }}-docker-registry-cert"
+  shell: "kubectl -n {{ binder_namespace }} delete secret docker-registry-cert"
   ignore_errors: True
   no_log: True
 

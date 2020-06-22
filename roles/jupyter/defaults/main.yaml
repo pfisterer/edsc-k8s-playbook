@@ -1,0 +1,22 @@
+binder_enable: False
+
+binder_namespace: "cert-manager"
+binder_release_name: "hub"
+# https://jupyterhub.github.io/helm-chart/#development-releases-binderhub or run "helm repo update && helm search repo -l  jupyterhub/binderhub"
+binder_release_version: "0.2.0-n079.h351d336"
+
+jupyter_docker_registry_release_name: "docker-registry"
+jupyter_docker_registry_url: "https://docker-registry.{{ domain }}"
+jupyter_docker_registry_hostname: "docker-registry.{{ domain }}"
+jupyter_docker_registry_auth_hostname: "docker-registry-auth.{{ domain }}"
+jupyter_docker_registry_username: "admin"
+jupyter_docker_registry_cert_issuer: "docker-auth"
+jupyter_docker_registry_image_prefix: "docker-registry.{{ domain }}/admin/hubimage-"
+jupyter_docker_registry_token_url: "https://docker-registry-auth.{{ domain }}/auth?service=token-service"
+
+jupyter_ingress_hostname: "jupyter.{{ domain }}"
+jupyter_ingress_binder_hostname: "binder.{{ domain }}"
+
+# TODO: should be generated
+jupyter_binder_api_token: "a92b7cc4597da9b48bcb04d2bd6e42a8dfecec3c591ab0d12ebc86949509cb35"
+jupyter_proxy_token: "989ca52ad323fe5c5f4f6169cb75b627ba7d3b6bf3994ab3ed5b1acb2875c57d"

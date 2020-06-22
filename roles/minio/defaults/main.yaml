@@ -1,0 +1,5 @@
+minio_enable: False
+
+minio_namespace: "cert-manager"
+minio_release_name: "minio"
+minio_ingress_hostname: "minio.{{ domain }}"
