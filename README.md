@@ -24,6 +24,11 @@ Destroy
 
 - Ansible (tested with version 2.9.9)
 
+## Some notes
+
+- Ansible: [Using Variables - Variable precedence: Where should I put a variable?](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
+
 # Authors
 
 - Dennis Pfisterer <https://github.com/pfisterer>
+

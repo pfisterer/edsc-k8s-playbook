@@ -1,0 +1,1 @@
+ansible-playbook --extra-vars "@$1" create.yaml
