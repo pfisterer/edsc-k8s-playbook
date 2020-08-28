@@ -9,16 +9,22 @@ Create
 Destroy
 - Run `ansible-playbook --extra-vars "@your-settings.yaml" destroy.yaml`
 
+## Requirements
 
-## Open Issues
+Python packages `kubernetes` and `openshift` are required. Run `pip3 install kubernetes openshift`.
 
+## Open Issues / Todos
+
+- Use ClusterIssuer instead of namespaced Issuer
 - Destroy does not check whether a component should have been installed in the first place (e.g., it tries to delete nginx ingress despite the fact that is shouldn't have been installed)
 - Binder Tokens should be randomly generated
 
 - Add option to configure a github access token in `files/binderhub.yaml`
-	```GitHubRepoProvider:
+
+```
+GitHubRepoProvider:
 		access_token: dsdfdsafasdfsdaffasdfassadfasdf7sdf
-	```
+```
 
 ## Prerequisites
 
