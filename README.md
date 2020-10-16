@@ -2,12 +2,25 @@
 
 ## Run the Ansible playbook directly
 
-Create
-- Run all roles: `ansible-playbook --extra-vars "@your-settings.yaml" create.yaml`
-- Run sub-elements only (e.g., only keycloak): `ansible-playbook --extra-vars "@your-settings.yaml" --tags keycloak create.yaml`
+### Create
 
-Destroy
-- Run `ansible-playbook --extra-vars "@your-settings.yaml" destroy.yaml`
+Run all roles: 
+
+```bash
+ansible-playbook --extra-vars "@your-settings.yaml" create.yaml
+```
+
+Run some elements only (e.g., only keycloak): 
+
+```bash
+ansible-playbook --extra-vars "@your-settings.yaml" --tags keycloak create.yaml
+```
+
+### Destroy
+
+```bash
+ansible-playbook --extra-vars "@your-settings.yaml" destroy.yaml
+```
 
 ## Requirements
 
