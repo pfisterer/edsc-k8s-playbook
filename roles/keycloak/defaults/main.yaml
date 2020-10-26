@@ -4,3 +4,4 @@ keycloak_release_name: "keycloak"
 keycloak_ingress_hostname: "keycloak.{{ domain }}"
 keycloak_admin_user: "admin"
 keycloak_admin_password: "admin-password"
+keycloak_use_persistent_storage: True

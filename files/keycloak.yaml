@@ -1,15 +1,28 @@
-keycloak:
-  username: "{{ keycloak_admin_user }}"
-  password: "{{ keycloak_admin_password }}"
+extraEnv: |
+  - name: KEYCLOAK_USER
+    value: "{{ keycloak_admin_user }}"
+  - name: KEYCLOAK_PASSWORD
+    value: "{{ keycloak_admin_password }}"
+  - name: PROXY_ADDRESS_FORWARDING
+    value: "true"
 
-  ingress:
+ingress:
+  enabled: true
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "{{ keycloak_ingress_hostname }}"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  rules:
+    - 
+      host: "{{ keycloak_ingress_hostname }}"
+      paths:
+        - /  
+  tls:
+    - hosts:
+        - "{{ keycloak_ingress_hostname }}"
+
+{% if keycloak_use_persistent_storage == True %}
+postgresql:
+  persistence:
     enabled: true
-    annotations:
-      external-dns.alpha.kubernetes.io/hostname: "{{ keycloak_ingress_hostname }}"
-      kubernetes.io/ingress.class: "nginx"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    hosts:
-      - "{{ keycloak_ingress_hostname }}"
-    tls:
-      - hosts:
-          - "{{ keycloak_ingress_hostname }}"
+{% endif %}
