@@ -1,6 +1,44 @@
 # Dennis' K8S playbook
 
+This playbook deploys a number of things in a Kubernetes cluster.
+
+Infrastructure: DNS + Certificates
+- [External DNS](https://github.com/kubernetes-sigs/external-dns)
+- [Cert-Manager](https://github.com/jetstack/cert-manager)
+
+Software
+- [Keycloak](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak)
+- [Binderhub](https://github.com/jupyterhub/binderhub)
+- [Apache Hadoop](https://hadoop.apache.org/) with [Apache Knox](https://knox.apache.org/)
+- [Minio](https://min.io/)
+
 ## Run the Ansible playbook directly
+
+### Configuration 
+
+Create a YAML file (e.g., `your-settings.yaml`) to select which software to instal (and override default configuration). See `roles/*/defaults/main.yaml` for the individual parameters.
+
+Example:
+
+```yaml
+domain: "bla.example.com"
+
+# external dns + cert-manager
+rfc2136_nameserver_ip: "192.168.1.2"
+
+# external dns
+external_dns_enable: True
+rfc2136_tsigSecret: "sdfkjasdasdfasdfsdaf...sadfsadfdss=="
+rfc2136_tsigKeyname: "{{ domain }}"
+rfc2136_tsigAlg: "hmac-sha512"
+
+# cert-manager
+cert_manager_enable: True
+letsencrypt_email: "xx.yyr@example.com"
+
+# binderhub + jupyterhub
+binder_enable: True
+```
 
 ### Create
 
