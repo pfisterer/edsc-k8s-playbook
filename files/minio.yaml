@@ -1,7 +1,7 @@
 global:
   minio:
-    accessKey: "sfsafasfasdfasdfsdaf"
-    secretKey: "DEasfasdfasdfasdfsfaF"
+    accessKey: "{{ minio_access_key }}"
+    secretKey: "{{ minio_secret_key }}"
 
 ## MinIO credentials
 ##
