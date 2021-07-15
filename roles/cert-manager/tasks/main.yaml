@@ -25,12 +25,6 @@
   no_log: True
   when: cert_manager_must_be_installed
 
-- name: Add custom ressource definitions for cert-manager
-  shell: kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/deploy/manifests/00-crds.yaml
-  ignore_errors: True
-  no_log: True
-  when: cert_manager_must_be_installed
-
 - name: Add https://charts.jetstack.io repo to helm
   shell: "helm repo add jetstack https://charts.jetstack.io"
   when: cert_manager_must_be_installed
@@ -45,7 +39,7 @@
 #  when: cert_manager_must_be_installed
 
 - name: Install cert-manager via helm
-  shell: "helm install --namespace {{ cert_manager_namespace }} --version {{ cert_manager_version }} --set 'image.tag={{ cert_manager_image_tag }}' --set 'extraArgs[0]=--v={{ cert_manager_verbosity }}' --set 'webhook.enabled=false' --set ingressShim.defaultIssuerName=issuer-letsencrypt --set ingressShim.defaultIssuerKind=Issuer '{{ cert_manager_release_name }}' 'jetstack/cert-manager'"
+  shell: "helm install --namespace {{ cert_manager_namespace }} --set 'extraArgs[0]=--v={{ cert_manager_verbosity }}' --set 'webhook.enabled=false' --set ingressShim.defaultIssuerName=issuer-letsencrypt  --set ingressShim.defaultIssuerKind=Issuer '{{ cert_manager_release_name }}' --set installCRDs=true 'jetstack/cert-manager'"
   when: cert_manager_must_be_installed
 
 # If you would also like to use the old kube-lego kubernetes.io/tls-acme: "true" annotation for fully automated TLS, you will need to configure a default Issuer when deploying cert-manager. This can be done by adding the following --set when deploying using Helm:
