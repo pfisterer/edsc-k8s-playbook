@@ -23,8 +23,8 @@ Example:
 ```yaml
 domain: "bla.example.com"
 
-# external dns + cert-manager
-rfc2136_nameserver_ip: "192.168.1.2"
+# external dns + cert-manager (ip or hostname)
+rfc2136_nameserver: "192.168.1.2"
 
 # external dns
 external_dns_enable: True

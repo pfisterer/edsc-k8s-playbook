@@ -3,7 +3,7 @@
 domain: "my-domain.tld"
 
 # external dns + cert-manager
-rfc2136_nameserver_ip: "111.222.333.444"
+rfc2136_nameserver: "111.222.333.444"
 
 # external dns
 external_dns_enable: True

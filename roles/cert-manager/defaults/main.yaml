@@ -4,12 +4,9 @@ cert_manager_namespace: "cert-manager" # do not modify this (cf. https://docs.ce
 
 cert_manager_release_name: "cert-manager"
 
-cert_manager_version: "v0.11.0"
-cert_manager_image_tag: "v0.11.0"
-
 cert_manager_verbosity: 5
 
 # letsencrypt issuer requires an IP address
-rfc2136_nameserver: "{{ rfc2136_nameserver_ip }}:{{ rfc2136_nameserver_port }}" # letsencrypt issuer requires an IP address
+rfc2136_nameserver: "{{ rfc2136_nameserver }}:{{ rfc2136_nameserver_port }}" # letsencrypt issuer requires an IP address
 
 letsencrypt_cert_cn: "*.{{ domain }}"
