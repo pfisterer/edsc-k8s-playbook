@@ -45,7 +45,7 @@ binder_enable: True
 Run all roles: 
 
 ```bash
-ansible-playbook --extra-vars "@your-settings.yaml" create.yaml
+VARS="your-settings.yaml" ; ansible-playbook --extra-vars "@$VARS" create.yaml
 ```
 
 Run some elements only (e.g., only keycloak): 

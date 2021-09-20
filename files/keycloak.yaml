@@ -16,7 +16,8 @@ ingress:
     - 
       host: "{{ keycloak_ingress_hostname }}"
       paths:
-        - /  
+        - path: /  
+          pathType: Prefix
   tls:
     - hosts:
         - "{{ keycloak_ingress_hostname }}"

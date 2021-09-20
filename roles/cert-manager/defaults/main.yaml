@@ -1,12 +1,10 @@
 cert_manager_enable: False
 
-cert_manager_namespace: "cert-manager" # do not modify this (cf. https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html)
-
+# do not modify this (cf. https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html)
+cert_manager_namespace: "cert-manager"
 cert_manager_release_name: "cert-manager"
-
 cert_manager_verbosity: 5
 
-# letsencrypt issuer requires an IP address
-rfc2136_nameserver: "{{ rfc2136_nameserver }}:{{ rfc2136_nameserver_port }}" # letsencrypt issuer requires an IP address
+rfc2136_nameserver: "{{ rfc2136_nameserver }}:{{ rfc2136_nameserver_port }}"
 
 letsencrypt_cert_cn: "*.{{ domain }}"
