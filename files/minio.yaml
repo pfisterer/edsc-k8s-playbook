@@ -44,9 +44,9 @@ persistence:
 
 ingress:
   enabled: true
-  hosts:
-    - name: "{{ minio_ingress_hostname }}"
-      path: /
+  hostname: "{{ minio_ingress_hostname }}"
+  path: /
+  pathType: Prefix
   annotations:
     external-dns.alpha.kubernetes.io/hostname: "{{ minio_ingress_hostname }}"
     kubernetes.io/ingress.class: "nginx"
