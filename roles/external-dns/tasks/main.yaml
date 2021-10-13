@@ -15,6 +15,10 @@
   shell: "helm repo add bitnami https://charts.bitnami.com/bitnami"
   when: external_dns_status.rc != 0
 
+- name: Update helm repos
+  shell: "helm repo update"
+  when: external_dns_status.rc != 0
+
 - name: Create temporary file with helm values for external DNS
   tempfile:
     state: file
