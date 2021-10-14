@@ -3,6 +3,7 @@ minio_enable: False
 minio_namespace: "cert-manager"
 minio_release_name: "minio"
 minio_ingress_hostname: "minio.{{ domain }}"
+minio_ingress_api_hostname: "minio-api.{{ domain }}"
 
 minio_access_key: "sfsafasfasdfasdfsdaf"
 minio_secret_key: "DEasfasdfasdfasdfsfaF"
