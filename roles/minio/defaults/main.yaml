@@ -6,3 +6,4 @@ minio_ingress_hostname: "minio.{{ domain }}"
 
 minio_access_key: "sfsafasfasdfasdfsdaf"
 minio_secret_key: "DEasfasdfasdfasdfsfaF"
+minio_default_buckets: "demo_bucket"

@@ -26,7 +26,7 @@ global:
 
 ## Comma, semi-colon or space separated list of buckets to create at initialization (only in standalone mode)
 ##
-defaultBuckets: "bla"
+defaultBuckets: "{{ minio_default_buckets }}"
 
 ## Define custom environment variables to pass to the image here
 ##
