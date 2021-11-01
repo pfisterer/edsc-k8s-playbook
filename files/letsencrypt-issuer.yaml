@@ -1,4 +1,4 @@
-apiVersion: cert-manager.io/v1beta1
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: issuer-letsencrypt
@@ -21,7 +21,7 @@ spec:
           rfc2136:
             nameserver: "{{ rfc2136_nameserver }}"
             tsigKeyName: "{{ rfc2136_tsigKeyname }}"
-            tsigAlgorithm: "{{ rfc2136_tsigAlgLetsencrypt  }}"
+            tsigAlgorithm: "{{ rfc2136_tsigAlgLetsencrypt }}"
             tsigSecretSecretRef:
               name: tsig-secret
               key: tsig-secret-key
