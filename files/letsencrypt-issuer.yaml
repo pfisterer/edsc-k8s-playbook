@@ -15,9 +15,9 @@ spec:
       name: account-private-key-secret
 
     solvers:
-      - selector: {}
-        dns01:
+      - dns01:
           name: acme-dns01-provider
+          cnameStrategy: Follow
           rfc2136:
             nameserver: "{{ rfc2136_nameserver }}"
             tsigKeyName: "{{ rfc2136_tsigKeyname }}"
@@ -25,3 +25,6 @@ spec:
             tsigSecretSecretRef:
               name: tsig-secret
               key: tsig-secret-key
+        selector:
+          dnsZones:
+          - '{{ domain }}'

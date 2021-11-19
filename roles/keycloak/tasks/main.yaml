@@ -8,25 +8,31 @@
 - name: Add https://codecentric.github.io/helm-charts repo to helm
   shell: "helm repo add codecentric https://codecentric.github.io/helm-charts"
 
-- name: Update helm repos
-  shell: "helm repo update"
-
 - name: Check if already installed
   shell: helm status -n '{{ keycloak_namespace }}' '{{ keycloak_release_name }}'
   ignore_errors: True
   no_log: True
   register: keycloak_status
 
+- name: Update helm repos
+  shell: "helm repo update"
+  when:
+    - keycloak_status.rc != 0
+
 - name: Create temporary file with helm values
   tempfile:
     state: file
     suffix: keycloak-config.yaml
   register: keycloak_temp_config
+  when:
+    - keycloak_status.rc != 0
 
 - name: Render template content to temporary file
   template:
     src: files/keycloak.yaml
     dest: "{{ keycloak_temp_config.path }}"
+  when:
+    - keycloak_status.rc != 0
 
 - name: Install via helm
   shell: "helm install '--namespace={{ keycloak_namespace }}' -f '{{ keycloak_temp_config.path }}' '{{ keycloak_release_name }}' codecentric/keycloak"
