@@ -1,0 +1,12 @@
+controller:
+  extraArgs:
+    "default-ssl-certificate": "{{ cert_manager_namespace }}/ingress-certificate-secret"
+    "udp-services-configmap": "{{ nginx_ingress_namespace }}/nginx-udp-configmap"
+    "tcp-services-configmap": "{{ nginx_ingress_namespace }}/nginx-tcp-configmap"
+  config:
+    "proxy-body-size": "0"
+  publishService:
+    enabled: true
+  service:
+    annotations:
+      metallb.universe.tf/allow-shared-ip: "edsc-tools"

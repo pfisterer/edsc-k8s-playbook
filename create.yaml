@@ -3,6 +3,11 @@
   gather_facts: false
 
   roles:
+    - role: nginx-ingress
+      tags:
+        - nginx-ingress
+      when: nginx_ingress_enable
+
     - role: external-dns
       tags:
         - external-dns

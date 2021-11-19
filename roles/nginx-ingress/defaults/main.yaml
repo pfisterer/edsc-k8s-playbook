@@ -1,0 +1,4 @@
+nginx_ingress_enable: False
+
+nginx_ingress_namespace: "kube-system"
+nginx_ingress_release_name: "nginx-ingress"

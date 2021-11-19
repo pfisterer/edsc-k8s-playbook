@@ -1,0 +1,88 @@
+# ----------------------------------------------------
+# ----------------------------------------------------
+# Nginx Ingress via helm
+# ----------------------------------------------------
+# ----------------------------------------------------
+
+# ----------------------------------------------------
+# Check if installed
+
+- name: Check if already installed
+  shell: helm status -n '{{ nginx_ingress_namespace }}' '{{ nginx_ingress_release_name }}'
+  ignore_errors: True
+  no_log: True
+  register: nginx_ingress_status
+
+- name: Set variable to determine whether nginx_ingress must be installed
+  set_fact:
+    nginx_ingress_must_be_installed: "{{ nginx_ingress_status.rc != 0 }}"
+
+# ----------------------------------------------------
+# UDP configmap
+- name: Create temporary file for UDP configmap
+  tempfile:
+    state: file
+    suffix: nginx-udp-configmap.yaml
+  register: nginx_udp_configmap_config
+  when: nginx_ingress_must_be_installed
+
+- name: Render UDP configmaptemplate content to temporary file
+  template:
+    src: files/nginx-udp-configmap.yaml
+    dest: "{{ nginx_udp_configmap_config.path }}"
+  when: nginx_ingress_must_be_installed
+
+- name: Apply UDP configmap
+  shell: "kubectl -n {{ nginx_ingress_namespace }} apply -f {{ nginx_udp_configmap_config.path }}"
+  when: nginx_ingress_must_be_installed
+
+
+# ----------------------------------------------------
+# TCP configmap
+- name: Create temporary file for TCP configmap
+  tempfile:
+    state: file
+    suffix: nginx-tcp-configmap.yaml
+  register: nginx_tcp_configmap_config
+  when: nginx_ingress_must_be_installed
+
+- name: Render TCP configmap template content to temporary file
+  template:
+    src: files/nginx-tcp-configmap.yaml
+    dest: "{{ nginx_tcp_configmap_config.path }}"
+  when: nginx_ingress_must_be_installed
+
+- name: Apply TCP configmap
+  shell: "kubectl -n {{ nginx_ingress_namespace }} apply -f {{ nginx_tcp_configmap_config.path }}"
+  when: nginx_ingress_must_be_installed
+
+# ----------------------------------------------------
+# Add helm repo
+- name: Add https://kubernetes.github.io/ingress-nginx repo to helm
+  shell: "helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx"
+  when: nginx_ingress_must_be_installed
+
+- name: Update helm repos
+  shell: "helm repo update"
+  when: nginx_ingress_must_be_installed
+
+# ----------------------------------------------------
+# Create helm values yaml file
+- name: Create temporary file with helm values
+  tempfile:
+    state: file
+    suffix: nginx-ingress-values.yaml
+  register: nginx_ingress_helm_values
+  when: nginx_ingress_must_be_installed
+
+- name: Render template content to temporary file
+  template:
+    src: files/nginx-ingress-values.yaml
+    dest: "{{ nginx_ingress_helm_values.path }}"
+  when: nginx_ingress_must_be_installed
+
+# ----------------------------------------------------
+# Deploy via helm
+- name: Deploy NGINX Ingress via helm
+  shell: "helm install --wait --namespace '{{ nginx_ingress_namespace }}' -f '{{ nginx_ingress_helm_values.path }}' '{{ nginx_ingress_release_name }}' 'ingress-nginx/ingress-nginx'"
+  when: nginx_ingress_must_be_installed
