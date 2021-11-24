@@ -48,8 +48,7 @@ ingress:
   path: /
   pathType: Prefix
   annotations:
-#    external-dns.alpha.kubernetes.io/hostname: "{{ minio_ingress_hostname }}"
-#    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     ingress.kubernetes.io/ssl-redirect: "false"
   tls:
@@ -62,8 +61,7 @@ apiIngress:
   path: /
   pathType: Prefix
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: "{{ minio_ingress_api_hostname }}"
-#    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     ingress.kubernetes.io/ssl-redirect: "false"
   tls:

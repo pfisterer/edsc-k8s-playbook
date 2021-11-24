@@ -43,7 +43,6 @@ jupyterhub:
     hosts:
       - "{{ jupyter_ingress_hostname }}"
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: "{{ jupyter_ingress_hostname }}"
       kubernetes.io/ingress.class: "nginx"
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     tls:
@@ -55,7 +54,6 @@ ingress:
   hosts:
     - "{{ jupyter_ingress_binder_hostname }}"
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: "{{ jupyter_ingress_binder_hostname }}"
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
   tls:

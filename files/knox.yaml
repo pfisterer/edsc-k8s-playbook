@@ -16,7 +16,6 @@ ingress:
   hosts:
     - "{{ knox_ingress_hostname }}"
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: "{{ knox_ingress_hostname }}"
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
   tls:

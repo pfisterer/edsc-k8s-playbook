@@ -5,28 +5,40 @@
     kind: Namespace
     state: present
 
-- name: Add https://charts.bitnami.com/bitnami repo to helm
-  shell: "helm repo add bitnami https://charts.bitnami.com/bitnami"
-
-- name: Update helm repos
-  shell: "helm repo update"
-
 - name: Check if already installed
   shell: helm status -n '{{ minio_namespace }}' '{{ minio_release_name }}'
   ignore_errors: True
   no_log: True
   register: minio_status
 
+- name: Add https://charts.bitnami.com/bitnami repo to helm
+  shell: "helm repo add bitnami https://charts.bitnami.com/bitnami"
+  when:
+    - minio_enable
+    - minio_status.rc != 0
+
+- name: Update helm repos
+  shell: "helm repo update"
+  when:
+    - minio_enable
+    - minio_status.rc != 0
+
 - name: Create temporary file with helm values
   tempfile:
     state: file
     suffix: minio-config.yaml
   register: minio_temp_config
+  when:
+    - minio_enable
+    - minio_status.rc != 0
 
 - name: Render template content to temporary file
   template:
     src: files/minio.yaml
     dest: "{{ minio_temp_config.path }}"
+  when:
+    - minio_enable
+    - minio_status.rc != 0
 
 - name: Install via helm
   shell: "helm install '--namespace={{ minio_namespace }}' -f '{{ minio_temp_config.path }}' '{{ minio_release_name }}' bitnami/minio"
