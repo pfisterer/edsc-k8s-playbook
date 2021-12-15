@@ -10,3 +10,6 @@ controller:
   service:
     annotations:
       metallb.universe.tf/allow-shared-ip: "edsc-tools"
+    ports:
+      http: {{ nginx_ingress_http_port }}
+      https: {{ nginx_ingress_https_port }}

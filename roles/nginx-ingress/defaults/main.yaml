@@ -2,3 +2,6 @@ nginx_ingress_enable: False
 
 nginx_ingress_namespace: "kube-system"
 nginx_ingress_release_name: "nginx-ingress"
+
+nginx_ingress_http_port: 80
+nginx_ingress_https_port: 443
