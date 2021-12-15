@@ -5,6 +5,8 @@ extraEnv: |
     value: "{{ keycloak_admin_password }}"
   - name: PROXY_ADDRESS_FORWARDING
     value: "true"
+  - name: KEYCLOAK_LOGLEVEL
+    value: "{{ keycloak_loglevel }}"
 
 ingress:
   enabled: true
