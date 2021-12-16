@@ -6,10 +6,7 @@ metadata:
 spec:
   # https://github.com/jetstack/cert-manager/blob/master/pkg/apis/certmanager/v1alpha1/types_issuer.go
   acme:
-    # Development
-    #server: https://acme-staging-v02.api.letsencrypt.org/directory
-    # Production
-    server: https://acme-v02.api.letsencrypt.org/directory
+    server: "{{ letsencrypt_server }}"
     email: "{{ letsencrypt_email }}"
     privateKeySecretRef:
       name: account-private-key-secret

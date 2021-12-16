@@ -8,3 +8,11 @@ cert_manager_verbosity: 3
 rfc2136_nameserver: "{{ rfc2136_nameserver }}:{{ rfc2136_nameserver_port }}"
 
 letsencrypt_cert_cn: "*.{{ domain }}"
+
+
+# Development
+# server: https://acme-staging-v02.api.letsencrypt.org/directory
+# Production
+# server: https://acme-v02.api.letsencrypt.org/directory
+
+letsencrypt_server: "https://acme-v02.api.letsencrypt.org/directory"
